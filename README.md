@@ -55,5 +55,5 @@ Pages, GitHub Pages, etc.):
 
 ## Disclaimer
 
-This is an independent, unofficial tool. Always confirm any win and
+This is an Independent, unofficial tool. Always confirm any win and
 the claim process on the official IRD site before taking action.
