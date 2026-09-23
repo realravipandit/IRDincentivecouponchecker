@@ -1,9 +1,20 @@
+import { useState, useEffect } from "react";
+import { registerVisit } from "../api";
+
 export default function Header({ page, onNavigate }) {
+  const [visits, setVisits] = useState(null);
+
   const tabs = [
     { id: "checker", label: "Check coupon" },
     { id: "winners", label: "Winners" },
     { id: "about", label: "About" },
   ];
+
+  useEffect(() => {
+    registerVisit()
+      .then(setVisits)
+      .catch(() => setVisits(null));
+  }, []);
 
   return (
     <header className="site-header">
@@ -19,6 +30,9 @@ export default function Header({ page, onNavigate }) {
           </button>
         ))}
       </nav>
+      {visits !== null && (
+        <span className="visit-counter">👁 {visits.toLocaleString()} visitors</span>
+      )}
     </header>
   );
 }

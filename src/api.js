@@ -12,3 +12,30 @@ export async function fetchWinners() {
   }
   return res.json();
 }
+
+/**
+ * Increments and returns the site's total visit count.
+ * Call once per real page visit (not on every read).
+ * Shape: { count: number }
+ */
+export async function registerVisit() {
+  const res = await fetch(`${API_URL}/api/visits`, { method: "POST" });
+  if (!res.ok) {
+    throw new Error(`Backend responded ${res.status}`);
+  }
+  const data = await res.json();
+  return data.count;
+}
+
+/**
+ * Reads the current visit count without incrementing it.
+ * Shape: { count: number }
+ */
+export async function fetchVisitCount() {
+  const res = await fetch(`${API_URL}/api/visits`);
+  if (!res.ok) {
+    throw new Error(`Backend responded ${res.status}`);
+  }
+  const data = await res.json();
+  return data.count;
+}
