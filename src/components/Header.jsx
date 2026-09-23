@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { registerVisit } from "../api";
 
 export default function Header({ page, onNavigate }) {
   const [visits, setVisits] = useState(null);
+  const hasFired = useRef(false);
 
   const tabs = [
     { id: "checker", label: "Check coupon" },
@@ -11,6 +12,9 @@ export default function Header({ page, onNavigate }) {
   ];
 
   useEffect(() => {
+    if (hasFired.current) return;
+    hasFired.current = true;
+
     registerVisit()
       .then(setVisits)
       .catch(() => setVisits(null));
@@ -31,7 +35,7 @@ export default function Header({ page, onNavigate }) {
         ))}
       </nav>
       {visits !== null && (
-        <span className="visit-counter">👁 {visits.toLocaleString()} visitors</span>
+        <span className="visit-counter">👁 {visits.toLocaleString()}</span>
       )}
     </header>
   );

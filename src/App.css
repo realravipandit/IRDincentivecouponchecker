@@ -80,7 +80,6 @@ a {
 }
 
 /* --- Header / nav --------------------------------------------------- */
-
 .site-header {
   position: sticky;
   top: env(safe-area-inset-top, 0px);
@@ -88,8 +87,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
+  gap: 10px;
+  flex-wrap: wrap; /* allows nav to drop to its own line when space runs out */
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
@@ -107,6 +106,8 @@ a {
   font-size: 15px;
   margin: 0;
   color: var(--ink);
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .site-title::before {
@@ -145,6 +146,7 @@ a {
   color: var(--ink-muted);
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
 }
 
 .site-nav button.active {
@@ -156,6 +158,21 @@ a {
   color: var(--ink);
 }
 
+.visit-counter {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .site-nav {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: center;
+    margin-top: 4px;
+  }
+}
 /* --- Hero ------------------------------------------------------------- */
 
 .hero {
